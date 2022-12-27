@@ -2,6 +2,8 @@ package com.blurooo.chapter3_1_4.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -49,4 +51,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
+   /* @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        super.configure(auth);
+        JdbcUserDetailsManager manager = auth.jdbcAuthentication().getUserDetailsService();
+        manager.setDataSource(dataSource);
+        if (!manager.userExists("user")) {
+            manager.createUser(User.withUsername("user").password("123").roles("USER").build());
+        }
+        if (!manager.userExists("admin")) {
+            manager.createUser(User.withUsername("admin").password("123").roles("USER", "ADMIN").build());
+        }
+    }*/
 }
